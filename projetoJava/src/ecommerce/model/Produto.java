@@ -1,18 +1,28 @@
 package ecommerce.model;
 
 public class Produto {
+	private int id;
 	private String nome;
 	private String categoria;
 	private float valor;
 	private int quantidade;
 	
-	public Produto(String nome, String categoria, float valor, int quantidade) {
+	public Produto(int id, String nome, String categoria, float valor, int quantidade) {
+		this.id = id;
 		this.nome = nome;
 		this.categoria = categoria;
 		this.valor = valor;
 		this.quantidade = quantidade;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
 	public int getQuantidade() {
 		return quantidade;
 	}

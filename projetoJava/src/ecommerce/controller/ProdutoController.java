@@ -10,10 +10,23 @@ public class ProdutoController implements IProduto{
 	private ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
 	int numero = 0;
 
+	public Produto buscarNaCollection(int id) {
+		for (var produto: listaProdutos) {
+			if (produto.getId() == id) {
+				return produto;
+			}
+		}
+		return null;
+	}
+	
 	@Override
-	public void procurarPorNumero(int numero) {
-		// TODO Auto-generated method stub
+	public void procurarPorId(int id) {
+		var produto = buscarNaCollection(id);
 		
+		if (produto != null)
+			produto.visualizar();
+		else
+			System.out.println("\nO produto: " + id + " não foi encontrado");
 	}
 
 	@Override
@@ -51,6 +64,10 @@ public class ProdutoController implements IProduto{
 	public void adicionarAoCarrinho(int numero) {
 		// TODO Auto-generated method stub
 		
+	}
+	
+	public int gerarNumero() {
+		return ++numero;
 	}
 
 }

@@ -1,5 +1,7 @@
 package ecommerce;
 
+import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import ecommerce.controller.ProdutoController;
@@ -16,7 +18,7 @@ public class Menu {
 		ProdutoController produtos = new ProdutoController();
 		
 		Scanner leia = new Scanner(System.in);
-		int opcao, quantidade;
+		int opcao, quantidade, id;
 		String nome, categoria;
 		float valor;
 		
@@ -24,14 +26,14 @@ public class Menu {
 		c.visualizar();
 		c.comprar();
 		
-		Produto p = new Produto("Celular", "Eletrônicos", 2000.0f, 2);
-		p.visualizar();
+		Produto p = new Produto(1, "Celular", "Eletrônicos", 2000.0f, 2);
+		produtos.cadastrar(p);
 		
-		Produto p2 = new Produto("Tablet", "Eletrônicos", 3000.0f, 10);
-		p2.visualizar();
+		Produto p2 = new Produto(2, "Tablet", "Eletrônicos", 3000.0f, 10);
+		produtos.cadastrar(p2);
 		
-		Produto p3 = new Produto("Notebook", "Eletrônicos", 5000.0f, 20);
-		p3.visualizar();
+		Produto p3 = new Produto(3, "Notebook", "Eletrônicos", 5000.0f, 20);
+		produtos.cadastrar(p3);
 		
 		
 		
@@ -56,8 +58,15 @@ public class Menu {
 			System.out.println("Entre com a opção desejada:                      ");
 			System.out.println("                                                 ");
 
-			opcao = leia.nextInt();
-
+			
+			try {
+				opcao = leia.nextInt();
+			}catch(InputMismatchException e){
+				System.out.println("\nDigite valores inteiros!");
+				leia.nextLine();
+				opcao=0;
+			}
+			
 			if (opcao == 7) {
 				System.out.println("\nDevCommerce - Obrigado pela preferência!");
 				leia.close();
@@ -68,9 +77,18 @@ public class Menu {
 				case 1 -> {
 					System.out.println("\nVisualizar todos os itens");
 					produtos.listarTodos();
+					
+					keyPress();
 				}
 				case 2 -> {
-					System.out.println("\nBuscar item");
+					System.out.println("\nBuscar produto");
+					
+					System.out.println("Digite o nome do produto:");
+					id = leia.nextInt();
+					
+					produtos.procurarPorId(id);
+					
+					keyPress();
 				}
 				case 3 -> {
 					System.out.println("\nComprar");
@@ -84,15 +102,39 @@ public class Menu {
 				case 6 -> {
 					System.out.println("\nCadastrar produto");
 					
-					System.out.println("Digite o nome do produto");
+					System.out.println("Digite o ID do produto:");
+					leia.skip("\\R?");
 					nome = leia.nextLine();
-					System.out.println("Digite a categoria");
+					System.out.println("Digite a categoria:");
+					leia.skip("\\R?");
 					categoria = leia.nextLine();
+					System.out.println("Digite o preço:");
+					valor = leia.nextFloat();
+					System.out.println("Digite a quantidade:");
+					quantidade = leia.nextInt();
+					
+					produtos.cadastrar(new Produto(produtos.gerarNumero(), nome, categoria, valor, quantidade));
+					
+					keyPress();
 				}
 				default -> System.out.println("\nOpção inválida!");
 			}
 		}
 
+	}
+
+	public static void keyPress() {
+
+		try {
+
+			System.out.println("\n\nPressione Enter para Continuar...");
+			System.in.read();
+
+		} catch (IOException e) {
+
+			System.out.println("Você pressionou uma tecla diferente de enter!");
+
+		}
 	}
 
 }
