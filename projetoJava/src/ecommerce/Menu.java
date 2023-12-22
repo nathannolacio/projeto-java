@@ -2,9 +2,31 @@ package ecommerce;
 
 import java.util.Scanner;
 
+import ecommerce.model.Cliente;
+import ecommerce.model.Produto;
+//import ecommerce.model.Usuario;
+//import ecommerce.model.Vendedor;
+
+
 public class Menu {
 
 	public static void main(String[] args) {
+		
+		
+		Cliente c = new Cliente("Neitan" , "neitan", 1);
+		c.visualizar();
+		c.comprar();
+		
+		Produto p = new Produto("Celular", 1, 2000.0f, 2);
+		p.visualizar();
+		
+		Produto p2 = new Produto("Tablet", 1, 3000.0f, 10);
+		p.visualizar();
+		
+		Produto p3 = new Produto("Notebook", 1, 5000.0f, 20);
+		p.visualizar();
+		
+		
 		Scanner leia = new Scanner(System.in);
 		int opcao;
 
