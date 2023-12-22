@@ -1,9 +1,14 @@
 package ecommerce.controller;
 
+import java.util.ArrayList;
+
 import ecommerce.model.Produto;
 import ecommerce.repository.IProduto;
 
 public class ProdutoController implements IProduto{
+	
+	private ArrayList<Produto> listaProdutos = new ArrayList<Produto>();
+	int numero = 0;
 
 	@Override
 	public void procurarPorNumero(int numero) {
@@ -13,14 +18,15 @@ public class ProdutoController implements IProduto{
 
 	@Override
 	public void listarTodos() {
-		// TODO Auto-generated method stub
-		
+		for (var produto : listaProdutos) {
+			produto.visualizar();
+		}
 	}
 
 	@Override
 	public void cadastrar(Produto produto) {
-		// TODO Auto-generated method stub
-		
+		listaProdutos.add(produto);
+		System.out.println("\nO produto: " + produto.getNome() + " foi cadastrado com sucesso!");
 	}
 
 	@Override

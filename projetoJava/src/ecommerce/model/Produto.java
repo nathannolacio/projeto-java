@@ -2,11 +2,11 @@ package ecommerce.model;
 
 public class Produto {
 	private String nome;
-	private int categoria;
+	private String categoria;
 	private float valor;
 	private int quantidade;
 	
-	public Produto(String nome, int categoria, float valor, int quantidade) {
+	public Produto(String nome, String categoria, float valor, int quantidade) {
 		this.nome = nome;
 		this.categoria = categoria;
 		this.valor = valor;
@@ -27,10 +27,10 @@ public class Produto {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-	public int getCategoria() {
+	public String getCategoria() {
 		return categoria;
 	}
-	public void setCategoria(int categoria) {
+	public void setCategoria(String categoria) {
 		this.categoria = categoria;
 	}
 	public float getValor() {
@@ -60,6 +60,7 @@ public class Produto {
 		return true;
 	}
 	
+	
 	public void visualizar() {
 		System.out.println("*************************************************");
 		System.out.println("  Produto:                                       ");
@@ -67,7 +68,7 @@ public class Produto {
 		System.out.println("* Nome: " + this.nome);
 		System.out.println("* Categoria: " + this.categoria);
 		System.out.println("* Valor: " + this.valor);
-		System.out.println("* Qauntidade: " + this.quantidade);
+		System.out.println("* Quantidade: " + this.quantidade);
 		System.out.println("*************************************************");
 	}
 }
