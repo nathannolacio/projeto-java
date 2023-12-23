@@ -2,8 +2,8 @@ package ecommerce.model;
 
 public class Vendedor extends Usuario{
 
-	public Vendedor(String nome, String email, int tipo) {
-		super(nome, email, tipo);
+	public Vendedor(int id, String nome, String email, int tipo) {
+		super(id, nome, email, tipo);
 	}
 	
 	public boolean cadastrarProduto() {

@@ -44,26 +44,38 @@ public class ProdutoController implements IProduto{
 
 	@Override
 	public void atualizar(Produto produto) {
-		// TODO Auto-generated method stub
+		var buscaProduto = buscarNaCollection(produto.getId());
 		
+		if (buscaProduto != null) {
+			listaProdutos.set(listaProdutos.indexOf(buscaProduto), produto);
+			System.out.println("\nO produto: " + produto.getId() + " foi atualizado com sucesso!");
+		} else
+			System.out.println("\nO produto " + produto.getId() + " não foi encontrado!");
 	}
 
 	@Override
-	public void deletar(int numero) {
-		// TODO Auto-generated method stub
+	public void deletar(int id) {
+		var produto = buscarNaCollection(id);
 		
+		if (produto != null) {
+			if (listaProdutos.remove(produto) == true) {
+				System.out.println("\nO produto: " + id + " foi deletado com sucesso!");
+			} else
+				System.out.println("\nO produto: " + id + " não foi encontrado!");
+		}
 	}
 
 	@Override
-	public void comprar(int numero, int quantidade) {
-		// TODO Auto-generated method stub
+	public void comprar(int id, int quantidade) {
+		var produto = buscarNaCollection(id);
 		
-	}
-
-	@Override
-	public void adicionarAoCarrinho(int numero) {
-		// TODO Auto-generated method stub
-		
+		if (produto != null) {
+			if (produto.comprar(quantidade) == true) {
+				System.out.println("\nO produto: " + id + " foi comprado com sucesso!");
+			} else
+				System.out.println("\nO produto: " + id + " não foi encontrado!");
+			
+		}
 	}
 	
 	public int gerarNumero() {

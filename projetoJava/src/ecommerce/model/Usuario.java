@@ -1,11 +1,13 @@
 package ecommerce.model;
 
 public abstract class Usuario {
+	private int id;
 	private String nome;
 	private String email;
 	private int tipo;
 	
-	public Usuario(String nome, String email, int tipo) {
+	public Usuario(int id, String nome, String email, int tipo) {
+		this.id = id;
 		this.nome = nome;
 		this.email = email;
 		this.tipo = tipo;

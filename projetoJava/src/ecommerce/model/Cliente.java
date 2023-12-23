@@ -2,8 +2,8 @@ package ecommerce.model;
 
 public class Cliente extends Usuario {
 
-	public Cliente(String nome, String email, int tipo) {
-		super(nome, email, tipo);
+	public Cliente(int id, String nome, String email, int tipo) {
+		super(id, nome, email, tipo);
 		
 	}
 	

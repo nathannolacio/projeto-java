@@ -53,25 +53,17 @@ public class Produto {
 	public boolean comprar(int quantidade) {
 		if (this.getQuantidade() >= quantidade) {
 			this.setQuantidade(this.getQuantidade() - quantidade);
-			System.out.println("Compra efetuada com sucesso!");
+			System.out.println("Compra efetuada!");
+			System.out.println("Valor total: R$" + (quantidade * this.getValor()));
 			return true;
 		}
 		System.out.println("Compra não efetuada!");
 		return false;
 	}
 	
-	public boolean addCarrinho() {
-		System.out.println("adicionado ao carrinho");
-		return true;
-	}
-	
-	public boolean retirarCarrinho() {
-		System.out.println("Retirado do carrinho");
-		return true;
-	}
-	
 	
 	public void visualizar() {
+		System.out.println();
 		System.out.println("*************************************************");
 		System.out.println("  Produto:                                       ");
 		System.out.println("*************************************************");

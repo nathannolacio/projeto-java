@@ -4,9 +4,11 @@ import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import ecommerce.controller.CarrinhoController;
 import ecommerce.controller.ProdutoController;
-import ecommerce.model.Cliente;
+//import ecommerce.controller.UsuarioController;
 import ecommerce.model.Produto;
+//import ecommerce.model.Cliente;
 //import ecommerce.model.Usuario;
 //import ecommerce.model.Vendedor;
 
@@ -16,15 +18,17 @@ public class Menu {
 	public static void main(String[] args) {
 		
 		ProdutoController produtos = new ProdutoController();
+		CarrinhoController carrinho = new CarrinhoController();
+		//UsuarioController usuarios = new UsuarioController();
 		
 		Scanner leia = new Scanner(System.in);
-		int opcao, quantidade, id;
-		String nome, categoria;
+		int opcao, quantidade, id, tipoConta;
+		String nomeProduto, categoria, nome, email;
 		float valor;
 		
-		Cliente c = new Cliente("Neitan" , "neitan", 1);
-		c.visualizar();
-		c.comprar();
+//		Cliente c = new Cliente("Neitan" , "neitan", 1);
+//		c.visualizar();
+//		c.comprar();
 		
 		Produto p = new Produto(1, "Celular", "Eletrônicos", 2000.0f, 2);
 		produtos.cadastrar(p);
@@ -39,7 +43,8 @@ public class Menu {
 		
 
 		while (true) {
-
+			
+			System.out.println();
 			System.out.println("*************************************************");
 			System.out.println("                                                 ");
 			System.out.println("                   DevCommerce                   ");
@@ -51,7 +56,7 @@ public class Menu {
 			System.out.println("          3 - Comprar                            ");
 			System.out.println("          4 - Ver carrinho                       ");
 			System.out.println("          5 - Adicionar item ao carrinho         ");
-			System.out.println("          6 - Cadastrar produto                  ");
+			System.out.println("          6 - Retirar item do carrinho           ");
 			System.out.println("          7 - Sair                               ");
 			System.out.println("                                                 ");
 			System.out.println("*************************************************");
@@ -75,7 +80,7 @@ public class Menu {
 
 			switch (opcao) {
 				case 1 -> {
-					System.out.println("\nVisualizar todos os itens");
+					System.out.println("\nVisualizar todos os produtos");
 					produtos.listarTodos();
 					
 					keyPress();
@@ -83,7 +88,7 @@ public class Menu {
 				case 2 -> {
 					System.out.println("\nBuscar produto");
 					
-					System.out.println("Digite o nome do produto:");
+					System.out.println("Digite o ID do produto:");
 					id = leia.nextInt();
 					
 					produtos.procurarPorId(id);
@@ -92,28 +97,39 @@ public class Menu {
 				}
 				case 3 -> {
 					System.out.println("\nComprar");
+					
+					System.out.println("Digite o ID do produto:");
+					id = leia.nextInt();
+					System.out.println("Digite a quantidade que deseja comprar:");
+					quantidade = leia.nextInt();
+					
+					produtos.comprar(id, quantidade);
+					
+					keyPress();
 				}
 				case 4 -> {
 					System.out.println("\nVer carrinho");
+					carrinho.listarProdutos();
+					
+					keyPress();
 				}
 				case 5 -> {
 					System.out.println("\nAdicionar item ao carrinho");
+					
+					System.out.println("Digite o ID do produto que deseja adicionar ao carrinho:");
+					id = leia.nextInt();
+					
+					carrinho.adicionarAoCarrinho(produtos.buscarNaCollection(id));
+					
+					keyPress();
 				}
 				case 6 -> {
-					System.out.println("\nCadastrar produto");
+					System.out.println("\nRetirar produto do carrinho");
 					
-					System.out.println("Digite o ID do produto:");
-					leia.skip("\\R?");
-					nome = leia.nextLine();
-					System.out.println("Digite a categoria:");
-					leia.skip("\\R?");
-					categoria = leia.nextLine();
-					System.out.println("Digite o preço:");
-					valor = leia.nextFloat();
-					System.out.println("Digite a quantidade:");
-					quantidade = leia.nextInt();
+					System.out.println("Digite o ID do produto que deseja adicionar ao carrinho:");
+					id = leia.nextInt();
 					
-					produtos.cadastrar(new Produto(produtos.gerarNumero(), nome, categoria, valor, quantidade));
+					carrinho.retirarDoCarrinho(produtos.buscarNaCollection(id));
 					
 					keyPress();
 				}
